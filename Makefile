@@ -17,14 +17,14 @@ test: $(addprefix test-,${VERSIONS})
 
 .PHONY: test-%
 
-test-%: nanobox/${SERVICE}-%
+test-%: mubox/${SERVICE}-%
 	stdbuf -oL test/run_all.sh $(subst test-,,$@)
 
-.PHONY: nanobox/${SERVICE}-%
+.PHONY: mubox/${SERVICE}-%
 
-nanobox/${SERVICE}-%:
+mubox/${SERVICE}-%:
 	for i in ${DEPENDS}; do \
-		docker pull nanobox/$${i} || (docker pull nanobox/$${i}-beta; docker tag nanobox/$${i}-beta nanobox/$${i}); \
+		docker pull mubox/$${i} || (docker pull mubox/$${i}-beta; docker tag mubox/$${i}-beta mubox/$${i}); \
 	done
 	docker pull $(subst -,:,$@) || (docker pull $(subst -,:,$@)-beta; docker tag $(subst -,:,$@)-beta $(subst -,:,$@))
 

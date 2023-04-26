@@ -9,20 +9,20 @@ start_warehouse() {
     --name=warehouse \
     -d \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.100 \
     --volume=${tarballs_dir}/:/tarballs \
-    nanobox/hoarder
+    mubox/hoarder
 
   # configure
   docker exec \
     warehouse \
-    /opt/nanobox/hooks/configure "$(warehouse_configure_payload)"
+    /opt/microbox/hooks/configure "$(warehouse_configure_payload)"
 
   # start
   docker exec \
     warehouse \
-    /opt/nanobox/hooks/start "$(warehouse_start_payload)"
+    /opt/microbox/hooks/start "$(warehouse_start_payload)"
 
   # upload tarballs
   docker exec \

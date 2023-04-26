@@ -7,18 +7,18 @@
 # 3 - run ldconfig
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
 # import some logic/helpers from lib/*.rb
-include Nanobox::Engine
-# require 'nanonox/logvac'
+include Microbox::Engine
+# require 'mubox/logvac'
 
 if payload[:logvac_host]
-  logger = Nanobox::Logvac.new(host: payload[:logvac_host], hostname: payload[:component][:uid], id: "#{payload[:component][:uid]}.#{payload[:member][:uid]}[fetch]")
+  logger = Microbox::Logvac.new(host: payload[:logvac_host], hostname: payload[:component][:uid], id: "#{payload[:component][:uid]}.#{payload[:member][:uid]}[fetch]")
 else
   logger = $stdout
 end
@@ -26,8 +26,8 @@ end
 # 1 - Download deploy environment
 logger.puts("Retrieving deploy environment...")
 directory "#{DATA_DIR}" do
-  owner 'gonano'
-  group 'gonano'
+  owner 'gomicro'
+  group 'gomicro'
 end
 
 execute "fetch and extract deploy" do
@@ -42,15 +42,15 @@ execute "fetch and extract deploy" do
           -C #{DATA_DIR}"
 end
 
-execute "ensure gonano owns data" do
-  command "chown -R gonano:gonano #{DATA_DIR}"
+execute "ensure gomicro owns data" do
+  command "chown -R gomicro:gomicro #{DATA_DIR}"
 end
 
 # 2 - Download live code
 logger.puts("Retrieving application...")
 directory "#{APP_DIR}" do
-  owner 'gonano'
-  group 'gonano'
+  owner 'gomicro'
+  group 'gomicro'
 end
 
 execute "fetch and extract app" do
@@ -65,8 +65,8 @@ execute "fetch and extract app" do
           -C #{APP_DIR}"
 end
 
-execute "ensure gonano owns code" do
-  command "chown -R gonano:gonano #{APP_DIR}"
+execute "ensure gomicro owns code" do
+  command "chown -R gomicro:gomicro #{APP_DIR}"
 end
 
 # 3 - Run ldconfig

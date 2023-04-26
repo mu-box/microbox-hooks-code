@@ -1,6 +1,6 @@
 require 'socket'
 
-module Nanobox
+module Microbox
   class Logvac
 
     EMERG   = {syslog: 0, prefix: 'EMERGENCY:'}
@@ -17,7 +17,7 @@ module Nanobox
       @id = opts[:id]
       @host = opts[:host] || '127.0.0.1'
       @port = opts[:port] || 514
-      @level = opts[:level] || Nanobox::Logvac::INFO
+      @level = opts[:level] || Microbox::Logvac::INFO
       @socket = ::UDPSocket.new
     end
 

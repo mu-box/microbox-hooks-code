@@ -1,5 +1,5 @@
-# nanobox-hooks-code [![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-hooks-code.svg)](https://travis-ci.org/nanobox-io/nanobox-hooks-code)
-Nanobox hooks for running web and worker components.
+# microbox-hooks-code [![Build Status Image](https://github.com/mu-box/microbox-hooks-code/actions/workflows/ci.yaml/badge.svg)](https://github.com/mu-box/microbox-hooks-code/actions)
+Microbox hooks for running web and worker components.
 
 ## Publishing
 
@@ -11,4 +11,4 @@ All changes, are tested through Travi-ci.
 
 ## License
 
-The MIT License (MIT)
+This project is released under [The MIT License](http://opensource.org/licenses/MIT).

@@ -7,19 +7,19 @@
 # 3 - Stop cron; Remove sv definitions for cron
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
 # import some logic/helpers from lib/*.rb
-include Nanobox::Engine
+include Microbox::Engine
 
 require 'timeout'
 
 if payload[:logvac_host]
-  logger = Nanobox::Logvac.new(host: payload[:logvac_host], hostname: payload[:component][:uid], id: "#{payload[:component][:uid]}.#{payload[:member][:uid]}[stop]")
+  logger = Microbox::Logvac.new(host: payload[:logvac_host], hostname: payload[:component][:uid], id: "#{payload[:component][:uid]}.#{payload[:member][:uid]}[stop]")
 else
   logger = $stdout
 end
@@ -41,8 +41,8 @@ start_cmds.each do |key, cmd|
 
 end
 
-if ! `pgrep -U gonano`.empty?
-  `pkill -U gonano -SIGTERM`
+if ! `pgrep -U gomicro`.empty?
+  `pkill -U gomicro -SIGTERM`
 end
 
 ensure_socket 'web' do
@@ -79,10 +79,10 @@ end
 
 begin
   Timeout::timeout(60) do
-    while ! `pgrep -U gonano`.empty? do
+    while ! `pgrep -U gomicro`.empty? do
       sleep 1
     end
   end
 rescue
-  `pkill -U gonano -SIGKILL`
+  `pkill -U gomicro -SIGKILL`
 end

@@ -65,7 +65,7 @@
   logvac_check_logs "Configuring environment variables"
 
   # verify narc.conf
-  run docker exec code bash -c "[ -f /opt/gonano/etc/narc.conf ]"
+  run docker exec code bash -c "[ -f /opt/gomicro/etc/narc.conf ]"
   echo "$output"
   [ "$status" -eq 0 ]
 
@@ -109,7 +109,7 @@
   [ "$status" -eq 0 ]
 
   # verify cron
-  run docker exec code bash -c "ls /opt/nanobox"
+  run docker exec code bash -c "ls /opt/microbox"
   [[ $output =~ cron ]]
 
   # verify second run doesn't break things
@@ -164,7 +164,7 @@
 
 # @test "Check logs for cron jobs" {
 #   sleep 60
-# 
+#
 #   logvac_check_logs "cron1"
 #   logvac_check_logs "cron2"
 # }

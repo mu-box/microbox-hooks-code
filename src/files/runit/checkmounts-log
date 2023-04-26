@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 # create the log directory if it doesn't exist
-[ -d /var/log/gonano/checkmounts ] || mkdir -p /var/log/gonano/checkmounts
+[ -d /var/log/gomicro/checkmounts ] || mkdir -p /var/log/gomicro/checkmounts
 
 # tell svlogd to drop the stdout into our custom location
-cd /var/log/gonano/checkmounts
-exec svlogd -v -ttt /var/log/gonano/checkmounts
+cd /var/log/gomicro/checkmounts
+exec svlogd -v -ttt /var/log/gomicro/checkmounts

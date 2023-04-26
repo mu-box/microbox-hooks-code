@@ -9,20 +9,20 @@ start_mist() {
     --name=mist \
     -d \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.103 \
     --volume=${tarballs_dir}/:/tarballs \
-    nanobox/mist
+    mubox/mist
 
   # configure
   docker exec \
     mist \
-    /opt/nanobox/hooks/configure "$(mist_configure_payload)"
+    /opt/microbox/hooks/configure "$(mist_configure_payload)"
 
   # start
   docker exec \
     mist \
-    /opt/nanobox/hooks/start "$(mist_start_payload)"
+    /opt/microbox/hooks/start "$(mist_start_payload)"
 
 }
 

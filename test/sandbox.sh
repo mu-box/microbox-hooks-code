@@ -41,11 +41,11 @@ docker run \
   --name=sandbox \
   -d \
   --privileged \
-  --net=nanobox \
+  --net=microbox \
   --ip=192.168.0.55 \
-  --volume=${hookit_dir}/:/opt/nanobox/hooks \
+  --volume=${hookit_dir}/:/opt/microbox/hooks \
   --volume=${payload_dir}/:/payloads \
-  nanobox/code:v1
+  mubox/code:v1
 
 # hop into the sandbox
 echo "Consoling into the sandbox..."

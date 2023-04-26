@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # export the path to be sure it's set properly
-export PATH="/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/gonano/sbin:/opt/gonano/bin"
+export PATH="/opt/local/sbin:/opt/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/gomicro/sbin:/opt/gomicro/bin"
 
-# command to run narc
-exec /opt/gonano/bin/checkmounts.sh
+# command to run checkmounts
+exec /opt/gomicro/bin/checkmounts.sh

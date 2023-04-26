@@ -4,7 +4,7 @@
 exec 2>&1
 
 # set HOME
-export HOME=/data/var/home/gonano
+export HOME=/data/var/home/gomicro
 
 # clear PATH so we can explicitly build it
 PATH=""
@@ -31,8 +31,8 @@ fi
 # set the defaults
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# prefix defaults with the gonano pkgsrc bootstrap
-PATH=/opt/gonano/sbin:/opt/gonano/bin:${PATH}
+# prefix defaults with the gomicro pkgsrc bootstrap
+PATH=/opt/gomicro/sbin:/opt/gomicro/bin:${PATH}
 
 # prefix all with base bootstrap
 PATH=/data/sbin:/data/bin:${PATH}
@@ -52,4 +52,4 @@ fi
 cd <%= code_dir %>
 
 # command to run <%= key %>
-exec chpst -u gonano <%= command %>
+exec chpst -u gomicro <%= command %>

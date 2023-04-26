@@ -50,7 +50,7 @@ stream-priority error
 
 # log streams
 <% start_cmds.keys.each do |key| -%>
-stream <%= key %>[daemon] /var/log/gonano/<%= key %>/current
+stream <%= key %>[daemon] /var/log/gomicro/<%= key %>/current
 <% end -%>
 <% watches.each do |key, path| -%>
 stream <%= key %> <%= path %>

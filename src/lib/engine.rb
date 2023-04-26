@@ -5,7 +5,7 @@
 #   4 - start
 #   5 - stop
 
-module Nanobox
+module Microbox
   module Engine
     # The DATA_DIR is the pkgsrc build root. This is where pkgsrc is
     # bootstrapped and contains a fully chrooted environment that packages can
@@ -27,11 +27,11 @@ module Nanobox
     # The APP_DIR contains the compiled app
     APP_DIR = '/app'
 
-    GONANO_PATH = [
+    GOMICRO_PATH = [
       "#{DATA_DIR}/sbin",
       "#{DATA_DIR}/bin",
-      '/opt/gonano/sbin',
-      '/opt/gonano/bin',
+      '/opt/gomicro/sbin',
+      '/opt/gomicro/bin',
       '/usr/local/sbin',
       '/usr/local/bin',
       '/usr/sbin',
@@ -104,20 +104,20 @@ module Nanobox
     def run_deploy_hook(index, cmd, cuid, muid, type, logger, bubble=false)
       begin
         Timeout::timeout(payload[:hook_timeout] || 300) do
-          logger.puts("Starting: #{cmd}", Nanobox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")
+          logger.puts("Starting: #{cmd}", Microbox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")
           execute "#{type}#{index + 1}: #{cmd}" do
             command "siphon --prefix '' -- bash -i -l -c \"#{escape cmd}\""
             cwd APP_DIR
-            user 'gonano'
-            on_data {|data| logger.puts(data, Nanobox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")}
+            user 'gomicro'
+            on_data {|data| logger.puts(data, Microbox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")}
           end
-          logger.puts("Finished: #{cmd}", Nanobox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")
+          logger.puts("Finished: #{cmd}", Microbox::Logvac::INFO, "#{cuid}.#{muid}[#{type}#{index + 1}]")
         end
       rescue Hookit::Error::UnexpectedExit => e
-        logger.puts("There was an unexpected exit from the deploy hook", Nanobox::Logvac::ERR, "#{cuid}.#{muid}[#{type}#{index + 1}]")
+        logger.puts("There was an unexpected exit from the deploy hook", Microbox::Logvac::ERR, "#{cuid}.#{muid}[#{type}#{index + 1}]")
         raise e if bubble
       rescue Timeout::Error => e
-        logger.puts("The hook took longer than expected to run", Nanobox::Logvac::ERR, "#{cuid}.#{muid}[#{type}#{index + 1}]")
+        logger.puts("The hook took longer than expected to run", Microbox::Logvac::ERR, "#{cuid}.#{muid}[#{type}#{index + 1}]")
         raise e if bubble
       end
     end

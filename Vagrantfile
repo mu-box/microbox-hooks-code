@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
 
       # add the source to our apt sources
       echo \
-        "deb https://apt.dockerproject.org/repo ubuntu-trusty main \n" \
+        "deb https://download.docker.com/linux/ubuntu trusty main \n" \
           > /etc/apt/sources.list.d/docker.list
 
       # update the package index
@@ -59,41 +59,41 @@ Vagrant.configure(2) do |config|
   # pull the build image to run tests in
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Pulling the mist image"
-    docker pull nanobox/code:v1
+    docker pull mubox/code:v1
   SCRIPT
 
   # fetch hoarder image for simulating warehouse
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Fetching image for warehouse..."
-    docker pull nanobox/hoarder
+    docker pull mubox/hoarder
   SCRIPT
 
   # fetch unfs image for simulating network_dirs
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Fetching image for unfs..."
-    docker pull nanobox/unfs
+    docker pull mubox/unfs
   SCRIPT
 
   # fetch logvac image for simulating logs
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Fetching image for logvac..."
-    docker pull nanobox/logvac
+    docker pull mubox/logvac
   SCRIPT
 
   # fetch mist image for simulating logs
   config.vm.provision "shell", inline: <<-SCRIPT
     echo "Fetching image for mist..."
-    docker pull nanobox/mist
+    docker pull mubox/mist
   SCRIPT
 
   # create an adhoc network
   config.vm.provision "shell", inline: <<-SCRIPT
-    if [[ ! `docker network ls | grep nanobox` ]]; then
+    if [[ ! `docker network ls | grep microbox` ]]; then
       docker network create \
         --driver=bridge \
         --subnet=192.168.0.0/16 \
         --opt="com.docker.network.driver.mtu=1450" \
-        --opt="com.docker.network.bridge.name=redd0" nanobox
+        --opt="com.docker.network.bridge.name=redd0" microbox
     fi
   SCRIPT
 

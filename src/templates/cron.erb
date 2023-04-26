@@ -4,7 +4,7 @@ require 'remote_syslog_logger'
 require 'logger'
 
 # hookit is installed as a bundled app, so we need bundler to load it for us
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
@@ -17,7 +17,7 @@ begin
   execute "<%= name %>" do
     command %{<%= command %>}
     cwd "<%= app_dir %>"
-    user 'gonano'
+    user 'gomicro'
     on_data {|data| logger.add(Logger::INFO, data, "<%= component_uid %>.<%= member_uid %>[cron<%= cron_id %>]")}
   end
   logger.add(Logger::INFO, "Finished: <%= name %>", "<%= component_uid %>.<%= member_uid %>[cron<%= cron_id %>]")

@@ -77,7 +77,7 @@
   [ "$status" -eq 0 ]
 
   # verify cron
-  run docker exec code bash -c "ls /opt/nanobox"
+  run docker exec code bash -c "ls /opt/microbox"
   [[ $output =~ cron ]]
 }
 

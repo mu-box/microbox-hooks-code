@@ -9,20 +9,20 @@ start_logvac() {
     --name=logvac \
     -d \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.102 \
     --volume=${tarballs_dir}/:/tarballs \
-    nanobox/logvac
+    mubox/logvac
 
   # configure
   docker exec \
     logvac \
-    /opt/nanobox/hooks/configure "$(logvac_configure_payload)"
+    /opt/microbox/hooks/configure "$(logvac_configure_payload)"
 
   # start
   docker exec \
     logvac \
-    /opt/nanobox/hooks/start "$(logvac_start_payload)"
+    /opt/microbox/hooks/start "$(logvac_start_payload)"
 }
 
 stop_logvac() {

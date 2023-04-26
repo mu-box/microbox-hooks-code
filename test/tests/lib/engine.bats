@@ -9,15 +9,15 @@
   start_cmds_script="$(cat <<-END
 #!/usr/bin/env ruby
 
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
-require '/opt/nanobox/hooks/lib/engine.rb'
+require '/opt/microbox/hooks/lib/engine.rb'
 
-include Nanobox::Engine
+include Microbox::Engine
 
 puts start_cmds
 END
@@ -26,15 +26,15 @@ END
   stop_cmds_script="$(cat <<-END
 #!/usr/bin/env ruby
 
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
-require '/opt/nanobox/hooks/lib/engine.rb'
+require '/opt/microbox/hooks/lib/engine.rb'
 
-include Nanobox::Engine
+include Microbox::Engine
 
 puts stop_cmds
 END
@@ -43,15 +43,15 @@ END
   stop_timeouts_script="$(cat <<-END
 #!/usr/bin/env ruby
 
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
-require '/opt/nanobox/hooks/lib/engine.rb'
+require '/opt/microbox/hooks/lib/engine.rb'
 
-include Nanobox::Engine
+include Microbox::Engine
 
 puts stop_timeouts
 END
@@ -60,15 +60,15 @@ END
   stop_forces_script="$(cat <<-END
 #!/usr/bin/env ruby
 
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
-require '/opt/nanobox/hooks/lib/engine.rb'
+require '/opt/microbox/hooks/lib/engine.rb'
 
-include Nanobox::Engine
+include Microbox::Engine
 
 puts stop_forces
 END
@@ -77,15 +77,15 @@ END
   cwds_script="$(cat <<-END
 #!/usr/bin/env ruby
 
-$:.unshift  '/opt/gonano/hookit/vendor/bundle'
+$:.unshift  '/opt/gomicro/hookit/vendor/bundle'
 require 'bundler/setup'
 
 # load hookit/setup to bootstrap hookit and import the dsl
 require 'hookit/setup'
 
-require '/opt/nanobox/hooks/lib/engine.rb'
+require '/opt/microbox/hooks/lib/engine.rb'
 
-include Nanobox::Engine
+include Microbox::Engine
 
 puts cwds
 END
@@ -119,7 +119,7 @@ END
 
 @test "test string start commands" {
   payload='{"start":"something"}'
-  
+
   run docker exec code bash -c "/tmp/start_cmds_test '$payload'"
 
   expected=$(cat <<-END
@@ -127,13 +127,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test array of strings start commands" {
   payload='{"start":["something","another","again"]}'
-  
+
   run docker exec code bash -c "/tmp/start_cmds_test '$payload'"
 
   expected=$(cat <<-END
@@ -141,13 +141,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test hash start commands" {
   payload='{"start":{"this":"something","that":"another","other":"again"}}'
-  
+
   run docker exec code bash -c "/tmp/start_cmds_test '$payload'"
 
   expected=$(cat <<-END
@@ -155,13 +155,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test string stop commands" {
   payload='{"stop":"something"}'
-  
+
   run docker exec code bash -c "/tmp/stop_cmds_test '$payload'"
 
   expected=$(cat <<-END
@@ -169,13 +169,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test hash stop commands" {
   payload='{"stop":{"this":"something","that":"another","other":"again"}}'
-  
+
   run docker exec code bash -c "/tmp/stop_cmds_test '$payload'"
 
   expected=$(cat <<-END
@@ -183,13 +183,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test string stop timeouts" {
   payload='{"stop_timeout": 10}'
-  
+
   run docker exec code bash -c "/tmp/stop_timeouts_test '$payload'"
 
   expected=$(cat <<-END
@@ -197,13 +197,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test hash stop timeouts" {
   payload='{"stop_timeout":{"this": 10,"that": 15,"other": 20}}'
-  
+
   run docker exec code bash -c "/tmp/stop_timeouts_test '$payload'"
 
   expected=$(cat <<-END
@@ -211,13 +211,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test string stop forces" {
   payload='{"stop_force":true}'
-  
+
   run docker exec code bash -c "/tmp/stop_forces_test '$payload'"
 
   expected=$(cat <<-END
@@ -225,13 +225,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test hash stop forces" {
   payload='{"stop_force":{"this":true,"that":false,"other":true}}'
-  
+
   run docker exec code bash -c "/tmp/stop_forces_test '$payload'"
 
   expected=$(cat <<-END
@@ -239,13 +239,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test string cwd" {
   payload='{"cwd":"something"}'
-  
+
   run docker exec code bash -c "/tmp/cwd_test '$payload'"
 
   expected=$(cat <<-END
@@ -253,13 +253,13 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 
 @test "test hash cwd" {
   payload='{"cwd":{"this":"something","that":"another","other":"again"}}'
-  
+
   run docker exec code bash -c "/tmp/cwd_test '$payload'"
 
   expected=$(cat <<-END
@@ -267,7 +267,7 @@ END
 END
 )
   echo "$output"
-  
+
   [ "$output" = "$expected" ]
 }
 

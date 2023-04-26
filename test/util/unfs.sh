@@ -8,19 +8,19 @@ start_unfs() {
     --name=unfs \
     -d \
     --privileged \
-    --net=nanobox \
+    --net=microbox \
     --ip=192.168.0.101 \
-    nanobox/unfs
+    mubox/unfs
 
   # configure
   docker exec \
     unfs \
-    /opt/nanobox/hooks/configure "$(unfs_configure_payload)"
+    /opt/microbox/hooks/configure "$(unfs_configure_payload)"
 
   # start
   docker exec \
     unfs \
-    /opt/nanobox/hooks/start "$(unfs_start_payload)"
+    /opt/microbox/hooks/start "$(unfs_start_payload)"
 }
 
 restart_unfs() {
